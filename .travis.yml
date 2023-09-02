@@ -6,15 +6,13 @@ before_install:
   - docker build -t anilkom/react-complex-test -f ./client/Dockerfile.dev ./client
 
 scripts:
-  - docker run -e CI=true anilkom/react-complex-test npm test
+  - docker run -d -e CI=true anilkom/react-complex-test npm test
 
-after_script:
+after_success:
   - docker build -t anilkom/react-complex-client ./client
   - docker build -t anilkom/react-complex-nginx ./nginx
   - docker build -t anilkom/react-complex-api ./server
   - docker build -t anilkom/react-complex-worker ./worker
-
-after_success:
   # Docker hub login
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # take those images and push to docker hub
