@@ -20,6 +20,6 @@ after_success:
   # take those images and push to docker hub
   - docker push anilkom/react-complex-client
   - docker push anilkom/react-complex-nginx
-  - docker push anilkom/react-comples-api
-  - docker push anilkom/react-comples-worker
+  - docker push anilkom/react-complex-api
+  - docker push anilkom/react-complex-worker
 
