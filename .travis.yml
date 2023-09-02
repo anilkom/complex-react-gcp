@@ -13,4 +13,11 @@ after_success:
   - docker build -t anilkom/react-complex-nginx ./nginx
   - docker build -t anilkom/react-complex-api ./server
   - docker build -t anilkom/react-complex-worker ./worker
-
+  # Docker hub login
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take those images and push to docker hub
+  - docker push anilkom/react-complex-client
+  - docker push anilkom/react-complex-nginx
+  - docker push anilkom/react-comples-api
+  - docker push anilkom/react-comples-worker
+  
