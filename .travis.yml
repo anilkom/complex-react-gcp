@@ -21,3 +21,14 @@ after_success:
   - docker push anilkom/react-complex-api
   - docker push anilkom/react-complex-worker
 
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "react-complex"
+  env: "React-complex-env"
+  bucket_name: "elasticbeanstalk-us-east-1-447400610059"
+  bucket_path: "react-complex"
+  on:
+    branch: main
+  access_key_id: $AWS_Access_Key
+  secret_access_key: "$AWS_Secret_Key"
