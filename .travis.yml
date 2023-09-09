@@ -15,7 +15,7 @@ before_install:
   - gcloud config set compute/region us-east1
   - gcloud container clusters get-credentials complex-react
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t complex-react-gcp-test -f ./client/Dockerfile.dev
+  - docker build -t anilkom/complex-react-gcp-test ./client
 script:
   - docker run -e CI=true anilkom/complex-react-gcp npm test
 deploy:
