@@ -5,7 +5,9 @@ env:
   global:
     - GIT_SHA=$(git rev-parse HEAD)
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+
 before_install:
+  - docker build -t anilkom/complex-react-gcp-test ./client
   - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
   - curl https://sdk.cloud.google.com | bash > /dev/null
   - source $HOME/google-cloud-sdk/path.bash.inc
@@ -15,7 +17,7 @@ before_install:
   - gcloud config set compute/region us-east1
   - gcloud container clusters get-credentials complex-react
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t anilkom/complex-react-gcp-test ./client
+
 script:
   - docker run -e CI=true anilkom/complex-react-gcp npm test
 deploy:
